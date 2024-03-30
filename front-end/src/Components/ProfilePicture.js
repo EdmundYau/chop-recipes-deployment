@@ -20,39 +20,68 @@ const ProfilePicture = ({photo, profileID}) => {
   useEffect(() => {
     setPicture(photo);
   }, [photo]);
-  const updateAvatar = (imgSrc) => {
-    avatarUrl.current = imgSrc;
-    let trimmedimgSrc = imgSrc.substring(22);
-    const uniqueFileName = `${Date.now()}-${trimmedimgSrc.name}`;
-    const storageRef = firebase.storage().ref();
-    const fileRef = storageRef.child(uniqueFileName);
-    
-    fileRef.putString(trimmedimgSrc,'base64').then((snapshot) => {
-        snapshot.ref.getDownloadURL().then((downloadURL) => {
-            updateAvatarDB(downloadURL);
-            setPicture(photo);
-            force_refresh();
-        });
-    });
-
-  };
- const force_refresh = () => {
-  window.location.href = "/user/" + userID;
+  
+  const force_refresh = () => {
+    window.location.href = "/user/" + userID;
 };
-  const { userID } = useUser();
-
-  const updateAvatarDB = async (downloadURL) => {
+const updateAvatar = async (imgSrc) => {
     try {
-      const response = await axios.post(
-        BACKEND_URL + "/api/updatePhoto/" + userID
-        , {downloadURL});
-        console.error("uploaded that to the db");
-        // window.location.href= "/user/"+userID;
+        // Assuming imgSrc is a base64-encoded string
+        let trimmedimgSrc = imgSrc.substring(22); // Remove base64 prefix if present
 
+        // Convert the base64 string to a Blob object
+        const byteCharacters = atob(trimmedimgSrc);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: 'image/jpeg' });
+
+        // Generate unique file name
+        const uniqueFileName = `${Date.now()}-avatar.jpg`;
+
+        // Upload the file to Firebase Storage
+        const storageRef = firebase.storage().ref();
+        const fileRef = storageRef.child(uniqueFileName);
+
+        const snapshot = await fileRef.put(blob);
+
+        // Get the download URL of the uploaded image
+        const downloadURL = await snapshot.ref.getDownloadURL();
+
+        // Update avatar URL in the database (MongoDB)
+        await updateAvatarDB(downloadURL);
+
+        // Log that updateAvatarDB is being called
+        console.log('updateAvatarDB called');
+
+        // Assuming setPicture is defined elsewhere
+        setPicture(downloadURL);
+
+        // Force refresh
+        force_refresh();
     } catch (error) {
-      console.error("Error update photo image:", error);
+        console.error('Error in updateAvatar:', error);
     }
-  };
+};
+
+
+const { userID } = useUser();
+
+const updateAvatarDB = async (downloadURL) => {
+    console.log("calling update photo image:");
+    try {
+        const response = await axios.post(
+            BACKEND_URL + "/api/updatePhoto/" + userID,
+            { downloadURL }
+        );
+        console.error("uploaded that to the db");
+        // You may handle the response here if needed
+    } catch (error) {
+        console.error("Error update photo image:", error);
+    }
+};
 
   return (
     <div className="flex flex-col items-center pt-12">
