@@ -30,6 +30,10 @@ mongoose
   .then(() => console.log("Connected to MongoDB..."))
   .catch((err) => console.log(err));
 
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
 // ================== Recipe routes ==================
 app.get("/api/recipe/all_recipes", recipeController.getAllRecipes);
 app.post("/uploadRecipe", recipeController.uploadRecipe);
