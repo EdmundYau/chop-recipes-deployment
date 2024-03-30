@@ -30,7 +30,8 @@ exports.login = (req, res) => {
               maxAge: 86400000,
               httpOnly: true,
               secure: true,
-              sameSite: "strict",
+              sameSite: "none",
+              path:'/'
             });
             return res.json({
               Login: true,
@@ -112,13 +113,13 @@ exports.logout = (req, res) => {
   res.clearCookie("accessToken", {
     httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
   });
   // Clear the refreshToken cookie
   res.clearCookie("refreshToken", {
     httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
   });
 
   return res.json({ Logout: true, message: "Successfully logged out" });

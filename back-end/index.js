@@ -19,7 +19,7 @@ app.use(express.json());
 //access backend from front end
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://chop-recipes-deployment.vercel.app",
     credentials: true,
   })
 );
