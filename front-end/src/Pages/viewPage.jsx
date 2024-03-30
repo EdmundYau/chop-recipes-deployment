@@ -10,8 +10,8 @@ import { useUser } from "../contexts/UserContent";
 const ViewRecipe = () => {
   // const recipe = fakeData; // Replace with actual fetched data
   let {recipe_id} = useParams();
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-
+  //const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+  const BACKEND_URL = "https://chop-recipes-back-end.vercel.app"
   const [recipe, setRecipe] = useState( {
             title: "", // To be filled from fetched data
             cover_image: "", // To be filled from fetched data

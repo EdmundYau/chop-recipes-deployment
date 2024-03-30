@@ -7,7 +7,8 @@ import "firebase/compat/storage";
 import { useUser } from "../contexts/UserContent";
 import React, { useEffect } from 'react';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+// const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = "https://chop-recipes-back-end.vercel.app"
 
 const ProfilePicture = ({photo, profileID}) => {
   const avatarUrl = useRef(

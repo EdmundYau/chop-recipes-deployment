@@ -176,7 +176,7 @@ export default function UploadPage() {
             }
         }
         
-        axios.post('http://localhost:5000/uploadRecipe', responseJson)
+        axios.post('https://chop-recipes-back-end.vercel.app/uploadRecipe', responseJson)
         .then(result => {
             setRecipeTitle('');
             setCoverImage(null);

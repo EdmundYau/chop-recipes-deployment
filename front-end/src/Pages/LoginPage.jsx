@@ -32,7 +32,7 @@ const LoginPage = () => {
     axios.defaults.withCredentials = true;
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:5000/login', {email,password})
+        axios.post('https://chop-recipes-back-end.vercel.app/login', {email,password})
         .then(result => {
             console.log(result)
             if (result.data.Login)

@@ -10,7 +10,7 @@ const LogoutButton = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/logout", {}, { withCredentials: true })
+      .post("https://chop-recipes-back-end.vercel.app/logout", {}, { withCredentials: true })
       .then((result) => {
         if (result.data.Logout) {
           setUserID(null);

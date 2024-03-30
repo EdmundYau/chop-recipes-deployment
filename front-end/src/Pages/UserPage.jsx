@@ -17,8 +17,8 @@ import EditableInput from "../Components/EditableInput.jsx";
 import UserDescriptionBox from "../Components/UserDescriptionBox.jsx";
 import RecipePreviewBox_userPage from "../Components/RecipePreviewBox_userPage.jsx";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-
+// const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = "https://chop-recipes-back-end.vercel.app"
 export default function Profile() {
   // protected route
   ProtectedRoute();

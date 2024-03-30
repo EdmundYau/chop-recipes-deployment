@@ -18,7 +18,8 @@ function EditableInput({value: initialValue, type = '', onSave, ...props}) {
     const handleSave = (event) => {
       event.stopPropagation();
       onSave(value);
-      axios.post('http://localhost:5000/api/updateDescription' , {description: value, userID: userIDedit})
+
+      axios.post('https://chop-recipes-back-end.vercel.app/api/updateDescription' , {description: value, userID: userIDedit})
         .then(result => {
             console.log(result.data);
         })

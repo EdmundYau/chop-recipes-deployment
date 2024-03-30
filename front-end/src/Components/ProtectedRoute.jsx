@@ -8,7 +8,7 @@ const ProtectedRoute = () => {
 
     axios.defaults.withCredentials = true;
     useEffect(() => {
-        axios.get('http://localhost:5000/verify')
+        axios.get('https://chop-recipes-back-end.vercel.app/verify')
         .then(res => {
             if(res.data.valid){
                 setMessage(res.data.message)

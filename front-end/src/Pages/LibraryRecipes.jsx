@@ -11,7 +11,8 @@ import ProtectedRoute from "../Components/ProtectedRoute";
 import Navbar from "../Components/Navbar";
 
 import Sidebar from "../Components/Sidebar";
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+//const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = "https://chop-recipes-back-end.vercel.app";
 
 function LibraryRecipes() {
   ProtectedRoute();

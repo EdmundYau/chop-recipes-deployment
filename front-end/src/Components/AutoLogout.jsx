@@ -7,7 +7,7 @@ const AutoLogout = () => {
     const { setUserID } = useUser(); // Use the setUserID function from your context
 
     useEffect(() => {
-        axios.post('http://localhost:5000/logout', {}, { withCredentials: true })
+        axios.post('https://chop-recipes-back-end.vercel.app/logout', {}, { withCredentials: true })
             .then(result => {
                 setUserID(null);
                 localStorage.removeItem('userID');

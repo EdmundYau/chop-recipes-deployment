@@ -50,7 +50,7 @@ const SignUpPage = () => {
             return;
         }
     
-        axios.post('http://localhost:5000/signup', {name,email,password})
+        axios.post('https://chop-recipes-back-end.vercel.app/signup', {name,email,password})
         .then(result => {
             if (result.data === "user already exists")
             {

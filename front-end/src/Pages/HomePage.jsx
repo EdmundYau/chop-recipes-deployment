@@ -47,8 +47,8 @@ function ShareWithFriend({ className, handleShare }) {
   )
 }
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-
+//const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = "https://chop-recipes-back-end.vercel.app";
 
 function HomePage(){
   const {userID} = useUser();
